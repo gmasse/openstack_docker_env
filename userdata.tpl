@@ -2,7 +2,7 @@
 
 packages: ['apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'pastebinit', 'docker-ce', 'zsh']
 package_update: true
-#package_upgrade: true
+package_upgrade: false
 package_reboot_if_required: false
 apt:
     preserve_sources_list: true
