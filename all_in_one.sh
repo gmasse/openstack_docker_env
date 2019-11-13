@@ -27,8 +27,8 @@ CHSH=no RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrus
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-# Downloading latest official Agnoster theme
-curl -fsSL -o ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/agnoster.zsh-theme https://raw.githubusercontent.com/agnoster/agnoster-zsh-theme/master/agnoster.zsh-theme
+# Downloading customized Agnoster theme
+curl -fsSL -o ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/agnoster.zsh-theme https://raw.githubusercontent.com/gmasse/agnoster-zsh-theme/master/agnoster.zsh-theme
 
 # Configuring zsh
 curl -fsSL -o ~/.zshrc https://raw.githubusercontent.com/gmasse/openstack_docker_env/master/zshrc
