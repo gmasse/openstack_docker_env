@@ -10,7 +10,6 @@ set shiftwidth=4        " when indenting with '>', use 4 spaces width
 set expandtab           " tabs are spaces
 
 set cursorline          " highlight current line
-set number              " show line numbers
 
 set showmatch           " highlight matching [{()}]
 
@@ -19,7 +18,16 @@ set hlsearch            " highlight matches
 
 set wildmenu            " visual autocomplete for command menu
 
-set clipboard=unnamed
+set mouse=h             " enable mouse in help file
+
+" show line numbers
+"set number
+" remove line numbers in insert mode
+"autocmd InsertEnter * set nonumber
+"autocmd InsertLeave * set number
+
+" allowing copy/paste between application on all platforms
+set clipboard^=unnamed,unnamedplus
 
 " vim-airline solarized theme
 let g:airline_solarized_bg='dark'
