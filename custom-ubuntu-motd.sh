@@ -1,5 +1,10 @@
 #!/bin/sh
 
+###################################################################################################################
+# To run this script (as root):
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/gmasse/openstack_docker_env/master/custom-ubuntu-motd.sh)"
+#
+
 # Remove help and Ubuntu(R) news
 chmod -x /etc/update-motd.d/10-help-text /etc/update-motd.d/50-motd-news /etc/update-motd.d/80-livepatch
 
