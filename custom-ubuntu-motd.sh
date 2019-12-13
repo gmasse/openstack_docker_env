@@ -9,6 +9,7 @@
 chmod -x /etc/update-motd.d/10-help-text /etc/update-motd.d/50-motd-news /etc/update-motd.d/80-livepatch
 
 # Install FIGlet
+apt-get -y update
 apt-get -y install --no-install-recommends figlet toilet-fonts
 
 # Fancy colors and banner
