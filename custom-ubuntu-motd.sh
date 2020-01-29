@@ -20,7 +20,7 @@ grey="\\\e[92m"
 red="\\\e[31m"
 printf "#!/bin/sh\n\nprintf \"$yellow\"\n" > /etc/update-motd.d/00-000-color-solarized
 printf "#!/bin/sh\n\nprintf \"$reset\"\n"  > /etc/update-motd.d/00-zzz-color-solarized
-printf "#!/bin/sh\n\nprintf \"$orange\"\nhostname | figlet -f mono12\nprintf \"$reset\"\n" > /etc/update-motd.d/05-hostname
+printf "#!/bin/sh\n\nprintf \"$orange\"\nhostname | figlet -f mono9\nprintf \"$reset\"\n" > /etc/update-motd.d/05-hostname
 printf "#!/bin/sh\n\nprintf \"$grey\"\n"   > /etc/update-motd.d/50-000-color-solarized
 printf "#!/bin/sh\n\nprintf \"$reset\"\n"  > /etc/update-motd.d/50-zzz-color-solarized
 printf "#!/bin/sh\n\nprintf \"$red\"\n"    > /etc/update-motd.d/98-000-color-solarized
