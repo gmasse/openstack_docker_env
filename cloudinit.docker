@@ -10,3 +10,5 @@ apt:
         docker-ce.list:
             source: deb [arch=amd64] https://download.docker.com/linux/ubuntu $RELEASE stable
             keyid: 0EBFCD88
+runcmd:
+  - update-alternatives --set editor /usr/bin/vim.basic

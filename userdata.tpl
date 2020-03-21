@@ -15,4 +15,5 @@ system_info:
         name: "ubuntu"
         shell: /bin/zsh
 runcmd:
+  - update-alternatives --set editor /usr/bin/vim.basic
   - runuser -l ubuntu -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/gmasse/openstack_docker_env/master/all_in_one.sh)"'
