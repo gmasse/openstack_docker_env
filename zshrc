@@ -98,3 +98,16 @@ export LC_CTYPE=$LANG
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Enable iTerm2 Shell Integration (if available)
+if [[ -e $HOME/.iterm2_shell_integration.zsh ]]; then
+  source $HOME/.iterm2_shell_integration.zsh
+  
+  # Customize Status Bar
+  iterm2_print_user_vars() {
+    # Print architecture type
+    # You need to add Interpolated String component in the Status Bar with the following expression: \(user.arch)
+    ARCH=$(arch)
+    iterm2_set_user_var arch $ARCH
+  }
+fi
