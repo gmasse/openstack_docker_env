@@ -1,5 +1,7 @@
 colorscheme solarized   " solarized theme
 set background=dark     " dark mode
+let g:solarized_termtrans = 1
+let g:solarized_termcolors = 16
 
 syntax enable           " enable syntax processing
 filetype indent on      " load filetype-specific indent files
