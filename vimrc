@@ -22,6 +22,8 @@ set wildmenu            " visual autocomplete for command menu
 
 set mouse=h             " enable mouse in help file
 
+set list listchars=trail:·      " show trailing space
+
 " show line numbers
 "set number
 " remove line numbers in insert mode

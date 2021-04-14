@@ -34,13 +34,14 @@ curl -fsSL -o ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/agnoster.zsh-theme https
 curl -fsSL -o ~/.zshrc https://raw.githubusercontent.com/gmasse/openstack_docker_env/master/zshrc
 
 
-# Installing vim packages (editorconfig, vim-airline w/ Solarized theme)
+# Installing vim packages (editorconfig, vim-airline w/ Solarized theme, indentLine)
 mkdir -p ~/.vim/pack/dist/start/
 mkdir -p ~/.vim/pack/themes/opt/
 git clone https://github.com/editorconfig/editorconfig-vim.git ~/.vim/pack/dist/start/editorconfig-vim
 git clone https://github.com/vim-airline/vim-airline ~/.vim/pack/dist/start/vim-airline
 git clone https://github.com/vim-airline/vim-airline-themes ~/.vim/pack/dist/start/vim-airline-themes
 git clone https://github.com/altercation/vim-colors-solarized ~/.vim/pack/themes/opt/vim-colors-solarized
+git clone https://github.com/Yggdroot/indentLine.git ~/.vim/pack/dist/start/indentLine
 curl -fsSL -o ~/.vimrc https://raw.githubusercontent.com/gmasse/openstack_docker_env/master/vimrc
 
 
