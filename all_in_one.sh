@@ -6,8 +6,7 @@ BRANCH="${BRANCH:-master}"
 # To run this script:
 #   sh -c "$(curl -fsSL https://raw.githubusercontent.com/gmasse/openstack_docker_env/master/all_in_one.sh)"
 # or from a specific branch:
-#   BRANCH=refs/heads/dev/starship sh -c "$(curl -fsSL https://raw.githubusercontent.com/gmasse/openstack_docker_env/\${BRANCH}/all_in_one.sh)"
-#
+#   BRANCH=refs/heads/dev/starship sh -c 'curl -fsSL "https://raw.githubusercontent.com/gmasse/openstack_docker_env/${BRANCH}/all_in_one.sh" | sh'
 
 
 for commandname in git curl zsh; do
@@ -25,6 +24,7 @@ for filename in ~/.vimrc ~/.zshrc; do
 done
 
 # Installing Starship
+mkdir -p ~/.local/bin
 curl -sS https://starship.rs/install.sh | sh -s -- --yes --bin-dir "$HOME/.local/bin"
 
 mkdir -p ~/.config && touch ~/.config/starship.toml
