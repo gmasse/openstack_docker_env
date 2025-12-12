@@ -1,8 +1,12 @@
 #!/bin/sh
 
-#############################################################################################################
+BRANCH="${BRANCH:-master}"
+
+############################################################################################################################
 # To run this script:
-# sh -c "$(curl -fsSL https://raw.githubusercontent.com/gmasse/openstack_docker_env/master/all_in_one.sh)"
+#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/gmasse/openstack_docker_env/master/all_in_one.sh)"
+# or from a specific branch:
+#   BRANCH=refs/heads/dev/starship sh -c "$(curl -fsSL https://raw.githubusercontent.com/gmasse/openstack_docker_env/\${BRANCH}/all_in_one.sh)"
 #
 
 
@@ -32,12 +36,8 @@ git clone --depth 1 'https://github.com/zsh-users/zsh-autosuggestions' "$HOME/.m
 git clone --depth 1 'https://github.com/zsh-users/zsh-history-substring-search' "$HOME/.my-custom-zsh/zsh-history-substring-search"
 
 
-
-# Downloading customized Agnoster theme
-# curl -fsSL -o ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/agnoster.zsh-theme https://raw.githubusercontent.com/gmasse/agnoster-zsh-theme/master/agnoster.zsh-theme
-
 # Configuring zsh
-curl -fsSL -o ~/.zshrc https://raw.githubusercontent.com/gmasse/openstack_docker_env/master/zshrc
+curl -fsSL -o ~/.zshrc https://raw.githubusercontent.com/gmasse/openstack_docker_env/${BRANCH}/zshrc
 
 
 # Installing vim packages (editorconfig, vim-airline w/ Solarized theme, indentLine)
@@ -48,5 +48,5 @@ git clone https://github.com/vim-airline/vim-airline ~/.vim/pack/dist/start/vim-
 git clone https://github.com/vim-airline/vim-airline-themes ~/.vim/pack/dist/start/vim-airline-themes
 git clone https://github.com/altercation/vim-colors-solarized ~/.vim/pack/themes/opt/vim-colors-solarized
 git clone https://github.com/Yggdroot/indentLine.git ~/.vim/pack/dist/start/indentLine
-curl -fsSL -o ~/.vimrc https://raw.githubusercontent.com/gmasse/openstack_docker_env/master/vimrc
+curl -fsSL -o ~/.vimrc https://raw.githubusercontent.com/gmasse/openstack_docker_env/${BRANCH}/vimrc
 
