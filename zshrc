@@ -1,113 +1,89 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# set homebrew environment
+if [[ -x "$HOME/homebrew/bin/brew" ]]
+then
+    eval "$($HOME/homebrew/bin/brew shellenv)"
+fi
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# include user-specific binaries and scripts
+export BIN_DIR=$HOME/.local/bin
+export PATH=$BIN_DIR:$PATH
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
-
-# Set list of themes to load
-# Setting this variable when ZSH_THEME=random
-# cause zsh load theme from this variable instead of
-# looking in ~/.oh-my-zsh/themes/
-# An empty array have no effect
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="yyyy-mm-dd"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-  zsh-syntax-highlighting
-  zsh-autosuggestions
-  history-substring-search
-)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# You may need to manually set your language environment
+# set the locale of the shell
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 export LC_CTYPE=$LANG
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+# set the location and filename of the history file
+export HISTFILE="$HOME/.zsh_history"
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# set the maximum number of lines to be saved in the history file
+export HISTSIZE="100000"
+export SAVEHIST="$HISTSIZE"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
+# enable comments "#" expressions in the prompt shell
+setopt INTERACTIVE_COMMENTS
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+# append new history entries to the history file
+setopt APPEND_HISTORY
 
-# Enable iTerm2 Shell Integration (if available)
-if [[ -e $HOME/.iterm2_shell_integration.zsh ]]; then
-  source $HOME/.iterm2_shell_integration.zsh
-  
-  # Customize Status Bar
-  iterm2_print_user_vars() {
-    # Print architecture type
-    # You need to add Interpolated String component in the Status Bar with the following expression: \(user.arch)
-    ARCH=$(arch)
-    iterm2_set_user_var arch $ARCH
-  }
+# save each command to the history file as soon as it is executed
+setopt INC_APPEND_HISTORY
+
+# ignore recording duplicate consecutive commands in the history
+setopt HIST_IGNORE_DUPS
+
+# ignore commands that start with a space in the history
+#setopt HIST_IGNORE_SPACE
+
+# enable completion
+autoload -U compinit; compinit
+# setopt GLOB_COMPLETE      # Show autocompletion menu with globs
+setopt MENU_COMPLETE        # Automatically highlight first element of completion menu
+setopt AUTO_LIST            # Automatically list choices on ambiguous completion.
+setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
+zstyle ':completion:*' completer _extensions _complete _approximate # Define completers
+zstyle ':completion:*' use-cache on # Use cache for commands using cache
+zstyle ':completion:*' menu select # Allow you to select in a menu
+zstyle ':completion:*' group-name '' # Required for completion to be in good groups (named after the tags)
+zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
+zstyle ':completion:*:*:*:*:descriptions' format '%F{blue}-- %D %d --%f'
+zstyle ':completion:*:*:*:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:*:*:*:warnings' format ' %F{red}-- no matches found --%f'
+if ! [[ -v LS_COLORS ]]; then
+    if command -v dircolors >/dev/null 2>&1; then
+        eval "$(dircolors -b)"
+    elif command -v gdircolors >/dev/null 2>&1; then
+        eval "$(gdircolors -b)"
+    fi
 fi
+zstyle ':completion:*:*:*:*:default' list-colors ${(s.:.)LS_COLORS} # Colors for files and directory
+
+# load zsh plugins
+source "$HOME/.my-custom-zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$HOME/.my-custom-zsh/f-sy-h/F-Sy-H.plugin.zsh"
+source "$HOME/.my-custom-zsh/zsh-history-substring-search/zsh-history-substring-search.zsh"
+
+# search history using up and down keys
+typeset -g -A key
+key[Up]="${terminfo[kcuu1]}"
+key[Down]="${terminfo[kcud1]}"
+[[ -n "${key[Up]}"        ]] && bindkey -- "${key[Up]}"         history-substring-search-up
+[[ -n "${key[Down]}"      ]] && bindkey -- "${key[Down]}"       history-substring-search-down
+
+# Finally, make sure the terminal is in application mode, when zle is
+# active. Only then are the values from $terminfo valid.
+if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
+    autoload -Uz add-zle-hook-widget
+    function zle_application_mode_start { echoti smkx }
+    function zle_application_mode_stop { echoti rmkx }
+    add-zle-hook-widget -Uz zle-line-init zle_application_mode_start
+    add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
+fi
+
+# search history using up and down keys
+#bindkey '^[[A' history-substring-search-up
+#bindkey '^[[B' history-substring-search-down
+
+# start starship prompt
+eval "$(starship init zsh)"
+

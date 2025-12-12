@@ -20,15 +20,21 @@ for filename in ~/.vimrc ~/.zshrc; do
   fi
 done
 
-# Installing Oh My Zsh
-CHSH=no RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# Installing Starship
+curl -sS https://starship.rs/install.sh | sh -s -- --yes --bin-dir "$HOME/.local/bin"
+
+mkdir -p ~/.config && touch ~/.config/starship.toml
 
 # Downloading some zsh plugins
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+mkdir -p "$HOME/.my-custom-zsh"
+git clone --depth 1 'https://github.com/z-shell/F-Sy-H' "$HOME/.my-custom-zsh/f-sy-h"
+git clone --depth 1 'https://github.com/zsh-users/zsh-autosuggestions' "$HOME/.my-custom-zsh/zsh-autosuggestions"
+git clone --depth 1 'https://github.com/zsh-users/zsh-history-substring-search' "$HOME/.my-custom-zsh/zsh-history-substring-search"
+
+
 
 # Downloading customized Agnoster theme
-curl -fsSL -o ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/agnoster.zsh-theme https://raw.githubusercontent.com/gmasse/agnoster-zsh-theme/master/agnoster.zsh-theme
+# curl -fsSL -o ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/agnoster.zsh-theme https://raw.githubusercontent.com/gmasse/agnoster-zsh-theme/master/agnoster.zsh-theme
 
 # Configuring zsh
 curl -fsSL -o ~/.zshrc https://raw.githubusercontent.com/gmasse/openstack_docker_env/master/zshrc
@@ -44,6 +50,3 @@ git clone https://github.com/altercation/vim-colors-solarized ~/.vim/pack/themes
 git clone https://github.com/Yggdroot/indentLine.git ~/.vim/pack/dist/start/indentLine
 curl -fsSL -o ~/.vimrc https://raw.githubusercontent.com/gmasse/openstack_docker_env/master/vimrc
 
-
-#chsh -s $(command -pv zsh)
-#if chsh return PAM error, have a look at https://serverfault.com/questions/202468/changing-the-shell-using-chsh-via-the-command-line-in-a-script
